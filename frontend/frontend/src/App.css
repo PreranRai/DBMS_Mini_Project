@@ -1,0 +1,315 @@
+/* IMPORT MODERN FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #4361ee;       /* Vibrant Blue */
+  --primary-dark: #3f37c9;
+  --secondary: #4895ef;
+  --accent: #f72585;        /* Pink/Red for Reset */
+  --success: #4cc9f0;       /* Cyan for Labs */
+  --text-dark: #2b2d42;
+  --text-light: #8d99ae;
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-dark);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* --- HEADER --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  background: var(--card-bg);
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 24px;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+/* --- CARDS & GRID --- */
+.forms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive */
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 16px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+/* --- INPUTS --- */
+input, select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #edf2f4;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  background: #f8f9fa;
+  transition: all 0.3s;
+  box-sizing: border-box; /* Fixes padding issues */
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: white;
+}
+
+/* Checkbox Row */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* --- BUTTONS --- */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Add Button (inside cards) */
+.card button {
+  background-color: var(--primary);
+  color: white;
+}
+.card button:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+}
+
+/* Reset Button */
+.btn-reset {
+  background: white;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  width: auto;
+  padding: 10px 25px;
+}
+.btn-reset:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Generate Button */
+.action-area {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.btn-gen {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-size: 18px;
+  padding: 18px 40px;
+  border-radius: 50px;
+  width: auto;
+  box-shadow: 0 10px 25px rgba(67, 97, 238, 0.4);
+}
+.btn-gen:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(67, 97, 238, 0.5);
+}
+
+/* --- VIEW SECTION --- */
+.view-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+}
+
+.view-section select {
+  width: auto;
+  margin: 0;
+  border-color: var(--primary);
+}
+
+/* --- TABLE --- */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Space between rows */
+  margin-top: 10px;
+}
+
+thead th {
+  color: var(--text-light);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 20px;
+  text-align: left;
+}
+
+tbody tr {
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+tbody tr:hover {
+  transform: scale(1.01);
+  z-index: 10;
+}
+
+td {
+  padding: 20px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Rounded corners for rows */
+td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+
+/* Status Tags (Pills) */
+.tag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lab {
+  background-color: rgba(247, 37, 133, 0.1);
+  color: var(--accent);
+}
+
+.lec {
+  background-color: rgba(76, 201, 240, 0.1);
+  color: #0077b6;
+}
+
+.status-msg {
+  font-weight: 600;
+  margin-top: 15px;
+  color: var(--text-dark);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* --- FIX FOR HOURS SLOT --- */
+
+.form-row-split {
+  display: flex;
+  gap: 15px;
+  align-items: center; /* Aligns them vertically */
+  margin-bottom: 15px;
+}
+
+.input-group {
+  flex: 1; /* Takes up remaining space */
+}
+
+.input-group label {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.input-group input {
+  margin-bottom: 0; /* Remove bottom margin inside group */
+  padding: 10px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f3f5;
+  padding: 10px 15px;
+  border-radius: 10px;
+  height: 48px; /* Match input height */
+  margin-top: 16px; /* Align with input box */
+  cursor: pointer;
+}
+
+.checkbox-group input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.checkbox-group label {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}

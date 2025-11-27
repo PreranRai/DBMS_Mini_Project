@@ -1,0 +1,22 @@
+cd backend
+node index.js
+Wait for: Backend running on 5000
+
+
+cd frontend
+npm start
+
+
+To give he password 
+mysql -u root -p < db_setup.sql
+Enter password: ***********
+
+Log in: mysql -u root -p
+
+USE campus_project;
+
+SHOW TABLES;
+
+SELECT * FROM faculty;
+
+EXIT;
