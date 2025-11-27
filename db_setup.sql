@@ -30,8 +30,10 @@ CREATE TABLE subjects (
     name VARCHAR(100) NOT NULL,
     is_lab BOOLEAN DEFAULT FALSE,
     hours_per_week INT DEFAULT 3,
+    fixed_room_id INT NULL,       
     dept_id INT,
-    FOREIGN KEY (dept_id) REFERENCES departments(dept_id) ON DELETE CASCADE
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id) ON DELETE CASCADE,
+    FOREIGN KEY (fixed_room_id) REFERENCES rooms(room_id) ON DELETE SET NULL
 );
 
 CREATE TABLE batches (
@@ -66,13 +68,13 @@ CREATE TABLE timetable (
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE CASCADE,
     FOREIGN KEY (slot_id) REFERENCES timeslots(slot_id) ON DELETE CASCADE,
 
-    -- 🛡️ SQL CONSTRAINT 1: Batch cannot be in two places at once
+    -- SQL CONSTRAINT 1: Batch cannot be in two places at once
     CONSTRAINT unique_batch_slot UNIQUE (batch_id, slot_id),
 
-    -- 🛡️ SQL CONSTRAINT 2: Faculty cannot teach two classes at once
+    --  SQL CONSTRAINT 2: Faculty cannot teach two classes at once
     CONSTRAINT unique_faculty_slot UNIQUE (faculty_id, slot_id),
 
-    -- 🛡️ SQL CONSTRAINT 3: Room cannot be used by two classes at once
+    --  SQL CONSTRAINT 3: Room cannot be used by two classes at once
     CONSTRAINT unique_room_slot UNIQUE (room_id, slot_id)
 );
 
@@ -100,19 +102,19 @@ BEGIN
     -- Get Room Info
     SELECT type INTO r_type FROM rooms WHERE room_id = NEW.room_id;
 
-    -- ❌ RULE A: Lab Subject must go to Lab Room
+    --  RULE A: Lab Subject must go to Lab Room
     IF (s_is_lab = 1 AND r_type != 'lab') THEN
         SIGNAL SQLSTATE '45000' 
         SET MESSAGE_TEXT = 'Error: Lab subjects must be scheduled in Lab Rooms only!';
     END IF;
 
-    -- ❌ RULE B: Theory Subject must NOT go to Lab Room
+    --  RULE B: Theory Subject must NOT go to Lab Room
     IF (s_is_lab = 0 AND r_type = 'lab') THEN
         SIGNAL SQLSTATE '45000' 
         SET MESSAGE_TEXT = 'Error: Theory subjects cannot be held in Lab Rooms!';
     END IF;
 
-    -- ❌ RULE C: Cannot exceed weekly hours
+    --  RULE C: Cannot exceed weekly hours
     SELECT COUNT(*) INTO s_hours_booked 
     FROM timetable 
     WHERE batch_id = NEW.batch_id AND subject_id = NEW.subject_id;
@@ -155,5 +157,9 @@ INSERT INTO batches (name, dept_id) VALUES ('3rd Year CSE', 1), ('2nd Year CSE',
 
 -- Slots (Mon 9-12, Tue 9-11)
 INSERT INTO timeslots (day, start_time, end_time) VALUES 
-('Mon', '09:00', '10:00'), ('Mon', '10:00', '11:00'), ('Mon', '11:00', '12:00'),
-('Tue', '09:00', '10:00'), ('Tue', '10:00', '11:00');
+('Mon', '08:30', '09:30'), ('Mon', '09:30', '10:30'), ('Mon', '10:45', '11:45'),('Mon', '11:45', '12:45'),('Mon', '01:30', '02:30'),
+('Tue', '08:30', '09:30'), ('Tue', '09:30', '10:30'), ('Tue', '10:45', '11:45'),('Tue', '11:45', '12:45'),('Tue', '01:30', '02:30'),
+('Wed', '08:30', '09:30'), ('Wed', '09:30', '10:30'), ('Wed', '10:45', '11:45'),('Wed', '11:45', '12:45'),('Wed', '01:30', '02:30'),
+('Thu', '08:30', '09:30'), ('Thu', '09:30', '10:30'), ('Thu', '10:45', '11:45'),('Thu', '11:45', '12:45'),('Thu', '01:30', '02:30'),
+('Fri', '08:30', '09:30'), ('Fri', '09:30', '10:30'), ('Fri', '10:45', '11:45'),('Fri', '11:45', '12:45'),('Fri', '01:30', '02:30'),
+('Sat', '08:30', '09:30'), ('Sat', '09:30', '10:30'), ('Sat', '10:45', '11:45'),('Sat', '11:45', '12:45'),('Sat', '01:30', '02:30');
